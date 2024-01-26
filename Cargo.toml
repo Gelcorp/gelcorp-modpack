@@ -1,0 +1,23 @@
+[package]
+name = "gelcorp-modpack"
+version = "0.1.0"
+edition = "2021"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+log = "0.4.20"
+path-clean = "1.0.1"
+serde = { version = "1.0.195", features = ["derive"] }
+serde_json = "1.0.111"
+walkdir = { version = "2.4.0", optional = true }
+zip = { version = "0.6.6", features = ["bzip2"], default-features = false }
+
+[dev-dependencies]
+simple_logger = "4.3.3"
+
+[features]
+default = ["folder-reader", "builder", "install"]
+folder-reader = ["dep:walkdir"]
+builder = ["folder-reader"]
+install = []
