@@ -1,6 +1,5 @@
-use std::{ fs::{ self, create_dir_all, File }, io::{ copy, Read, Seek, Write }, path::{ Path, PathBuf } };
-
-use log::{ debug, info, warn };
+use std::{ fs::{ self, create_dir_all, File }, io::{ copy, Read, Seek, Write, BufRead, BufReader }, path::{ Path, PathBuf } };
+use log::{ debug, info, warn, error };
 use path_clean::clean;
 
 use crate::{ reader::ModpackReader, types::{ ExtractionRule, StdError } };
@@ -179,10 +178,6 @@ impl<T: Read + Seek> ModpackArchiveReader<T> {
 }
 
 fn prepare_mods_folder(mods_folder: &PathBuf, extracted_mods_file: &PathBuf) -> Result<(), StdError> {
-  use std::io::{ BufRead, BufReader };
-
-  use log::error;
-
   create_dir_all(mods_folder)?;
   info!("Extracting base mods...");
 
