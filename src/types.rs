@@ -2,7 +2,7 @@ use serde::{ Serialize, Deserialize };
 
 pub(crate) type StdError = Box<dyn std::error::Error>;
 
-#[derive(Debug, Serialize, Deserialize)]
+#[derive(Debug, Serialize, Deserialize, Clone)]
 pub struct ModpackManifest {
   pub format_version: u8,
   pub minecraft_version: String,
@@ -14,7 +14,7 @@ pub struct ModpackManifest {
   pub extraction_rules: Vec<ExtractionRule>,
 }
 
-#[derive(Debug, Serialize, Deserialize)]
+#[derive(Debug, Serialize, Deserialize, Clone)]
 pub struct ModOptional {
   pub name: String,
   pub description: String,
@@ -24,7 +24,7 @@ pub struct ModOptional {
   pub incompatible_with: Vec<String>,
 }
 
-#[derive(Debug, Serialize, Deserialize)]
+#[derive(Debug, Serialize, Deserialize, Clone)]
 #[serde(tag = "type", rename_all = "camelCase")]
 pub enum ExtractionRule {
   Extract {
